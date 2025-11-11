@@ -17,5 +17,7 @@
 			]
 		}
 	},
-	"runArgs": ["--privileged"]
+	"runArgs": [
+		"--privileged"
+	]
 }

@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "prototype4-1.1",
-    "project_version":    "8d3557a-dirty",
+    "project_version":    "c47854b-dirty",
     "project_path":       "/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1",
     "idf_path":           "/home/jack/esp/v5.5.1/esp-idf",
     "build_dir":          "/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1/build",
@@ -441,7 +441,7 @@
             "type": "LIBRARY",
             "lib": "__idf_main",
             "reqs": [],
-            "priv_reqs": [ "esp_driver_gpio", "esp_driver_i2s", "espressif__led_strip" ],
+            "priv_reqs": [ "esp_driver_gpio", "esp_driver_i2s", "esp_timer", "espressif__led_strip" ],
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__led_strip" ],
             "file": "/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1/build/esp-idf/main/libmain.a",
@@ -1858,7 +1858,7 @@
             "dir": "/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1/main",
             "lib": "__idf_main",
             "reqs": [],
-            "priv_reqs": [ "esp_driver_gpio", "esp_driver_i2s", "espressif__led_strip" ],
+            "priv_reqs": [ "esp_driver_gpio", "esp_driver_i2s", "esp_timer", "espressif__led_strip" ],
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__led_strip" ],
             "include_dirs": [ "." ]
