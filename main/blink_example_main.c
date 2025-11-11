@@ -65,10 +65,13 @@ static i2s_chan_handle_t chan4; // I2S tx channel handler
 
 // --- FILE SAVING FUNCTION ---
 // Assumes the filesystem (e.g., SPIFFS) has been initialized and mounted.
-void save_first_stereo_sample(const uint8_t *i2s_buffer, int64_t timestamp)
+void save_first_stereo_sample(const uint8_t *i2s_buffer, int8_t index)
 {
 
-    printf("%f,%u,%u,%u,%u,%u,%u\n", timestamp, i2s_buffer[1], i2s_buffer[2], i2s_buffer[3], i2s_buffer[5], i2s_buffer[6], i2s_buffer[7]);
+    uint32_t number1 = (i2s_buffer[1] << 16) + (i2s_buffer[2] << 8) + i2s_buffer[3];
+    uint32_t number2 = (i2s_buffer[6] << 16) + (i2s_buffer[6] << 8) + i2s_buffer[7];
+    printf("%u,%lu\n", index * 2 - 1, number1);
+    printf("%u,%lu\n", index * 2, number2);
 
     // uint8_t *relevant6 = (uint8_t *)calloc(6, 1);
     // relevant6[0] = i2s_buffer[1];
@@ -83,7 +86,7 @@ static void i2s_example_init_std_duplex(void)
 {
     /* Step 1: Determine the I2S channel configuration and allocate both channels */
     i2s_chan_config_t pair1 = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_AUTO, I2S_ROLE_MASTER);
-    i2s_chan_config_t pair2 = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_AUTO, I2S_ROLE_SLAVE);
+    i2s_chan_config_t pair2 = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_AUTO, I2S_ROLE_MASTER);
     ESP_ERROR_CHECK(i2s_new_channel(&pair1, NULL, &chan2));
     ESP_ERROR_CHECK(i2s_new_channel(&pair2, NULL, &chan4));
 
@@ -176,18 +179,21 @@ void app_main(void)
     printf("I2S Duplex Loop Running without FreeRTOS Tasks...\n");
 
     /* Step 4: Run the continuous I/O loop in app_main */
+    int8_t index = 1;
     while (1)
     {
 
-        int64_t timestamp_us = esp_timer_get_time();
-        double timestamp_s = (double)timestamp_us / 1000000.0;
+        index == 1 ? index = 2 : index--;
+
+        // int64_t timestamp_us = esp_timer_get_time();
+        // double timestamp_s = (double)timestamp_us / 1000000.0;
 
         if (i2s_channel_read(chan2, buf2, EXAMPLE_BUFF_SIZE, &byte2, 100) == ESP_OK)
         {
-            printf("chan2 %d bytes\n-----------------------------------\n", byte2);
-            printf("[0] %x [1] %x [2] %x [3] %x\n[4] %x [5] %x [6] %x [7] %x\n\n",
-                   buf2[0], buf2[1], buf2[2], buf2[3], buf2[4], buf2[5], buf2[6], buf2[7]);
-            save_first_stereo_sample(buf2);
+            // printf("chan2 %d bytes\n-----------------------------------\n", byte2);
+            // printf("[0] %x [1] %x [2] %x [3] %x\n[4] %x [5] %x [6] %x [7] %x\n\n",
+            //    buf2[0], buf2[1], buf2[2], buf2[3], buf2[4], buf2[5], buf2[6], buf2[7]);
+            save_first_stereo_sample(buf2, index);
         }
         else
         {
@@ -195,10 +201,10 @@ void app_main(void)
         }
         if (i2s_channel_read(chan4, buf4, EXAMPLE_BUFF_SIZE, &byte4, 100) == ESP_OK)
         {
-            printf("chan4 %d bytes\n-----------------------------------\n", byte4);
-            printf("[0] %x [1] %x [2] %x [3] %x\n[4] %x [5] %x [6] %x [7] %x\n\n",
-                   buf4[0], buf4[1], buf4[2], buf4[3], buf4[4], buf4[5], buf4[6], buf4[7]);
-            save_first_stereo_sample(buf4);
+            // printf("chan4 %d bytes\n-----------------------------------\n", byte4);
+            // printf("[0] %x [1] %x [2] %x [3] %x\n[4] %x [5] %x [6] %x [7] %x\n\n",
+            //    buf4[0], buf4[1], buf4[2], buf4[3], buf4[4], buf4[5], buf4[6], buf4[7]);
+            save_first_stereo_sample(buf4, index);
         }
         else
         {

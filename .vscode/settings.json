@@ -6,7 +6,7 @@
     "interface/ftdi/esp32_devkitj_v1.cfg",
     "target/esp32.cfg"
   ],
-  "idf.port": "/dev/ttyUSB0",
+  "idf.port": "/dev/ttyUSB1",
   "idf.toolsPath": "/home/jack/.espressif",
   "idf.customExtraVars": {
     "IDF_TARGET": "esp32"
@@ -26,5 +26,6 @@
     "esp_spiffs.h": "c",
     "math.h": "c"
   },
-  "C_Cpp.dimInactiveRegions": false
+  "C_Cpp.dimInactiveRegions": false,
+  "idf.monitorPort": "/dev/ttyUSB1"
 }
