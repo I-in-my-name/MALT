@@ -337,6 +337,9 @@ MBEDTLS_FATAL_WARNINGS:BOOL=ON
 //Mbed TLS user config file (appended to default).
 MBEDTLS_USER_CONFIG_FILE:FILEPATH=
 
+//The directory containing a CMake configuration file for Matplot++.
+Matplot++_DIR:PATH=Matplot++_DIR-NOTFOUND
+
 //Value Computed by CMake
 Mbed TLS_BINARY_DIR:STATIC=/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1/build/esp-idf/mbedtls/mbedtls
 

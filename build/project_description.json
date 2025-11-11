@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "prototype4-1.1",
-    "project_version":    "1",
+    "project_version":    "ff3a0fa-dirty",
     "project_path":       "/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1",
     "idf_path":           "/home/jack/esp/v5.5.1/esp-idf",
     "build_dir":          "/home/jack/SoftwareWork/MALT/i2sWorkspace/prototype4-1.1/build",
@@ -11,7 +11,7 @@
     "app_elf":            "prototype4-1.1.elf",
     "app_bin":            "prototype4-1.1.bin",
     "build_type":         "flash_app",
-    "git_revision":       "v5.5.1-dirty",
+    "git_revision":       "v5.5.1-1-g70206bf6f-dirty",
     "target":             "esp32",
     "rev":                "0",
     "min_rev":            "0",
